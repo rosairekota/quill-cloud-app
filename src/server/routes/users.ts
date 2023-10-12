@@ -1,14 +1,13 @@
-import {publicProcedure, router} from './trpc';
-import {z} from "zod";
-import {getKindeServerSession} from "@kinde-oss/kinde-auth-nextjs/server";
-import {TRPCError} from "@trpc/server";
-import {db} from "@/db";
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import { publicProcedure, router } from "../trpc";
+import { TRPCClientError } from "@trpc/client";
+import { db } from "@/server/database";
 
-export const appRouter= router({
-    authCallback:publicProcedure.query(async ()=>{
+export const userRouter = router({
+    auth:publicProcedure.query(async ()=>{
         const {getUser} = getKindeServerSession()
         const user = getUser()
-        if (!user || !user.id) throw  new TRPCError({code:"UNAUTHORIZED"})
+        if (!user || !user.id) throw  new TRPCClientError({code:"UNAUTHORIZED"})
 
         const dbUser = await db.user.findFirst({
             where:{
@@ -25,6 +24,4 @@ export const appRouter= router({
         }
         return {success:true, user:user}
     })
-});
-
-export type AppRouter = typeof appRouter;
+})
