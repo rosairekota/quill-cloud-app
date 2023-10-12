@@ -3,7 +3,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import {cn as twMergeCn } from "@/lib/utils";
 import {Navbar} from "@/components/Navbar";
-import {Providers} from "@/components/Providers";
+import {Providers} from "@/app/_trpc-provider/Providers";
 
 const inter = Inter({ subsets: ['latin'] })
 
