@@ -3,7 +3,6 @@
 import {getKindeServerSession} from "@kinde-oss/kinde-auth-nextjs/server";
 import {redirect, useRouter, useSearchParams} from "next/navigation";
 import {trpc} from "@/app/_trpc-provider/client";
-import {retryDelay} from "@trpc/client/src/internals/retryDelay";
 import {Loader2} from "lucide-react";
 
 const AuthPage = () => {
